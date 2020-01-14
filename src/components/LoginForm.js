@@ -16,9 +16,12 @@ class LoginForm extends Component {
     const { email, password } = this.state;
     this.setState({ error: "", loading: true})
 
+    // Allow the user to login with an email and password
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(this.onLoginSuccess)
       .catch(() => {
+        // if in case of new user
+        // it creates new user and allow you to login
         firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(this.onLoginSuccess)
           .catch(() => {
